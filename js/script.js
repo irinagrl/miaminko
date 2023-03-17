@@ -1,3 +1,6 @@
+// import todo from "./todo.js";
+
+// console.log(todo);
 // const date = new Date();
 
 
@@ -214,30 +217,3 @@ function prevMonth() {
 // }
 
 // document.onload = generateCalendar(date);
-
-//To Do list
-function getTotal() {
-    localStorage.getItem('width');
-    const total = document.getElementById("total");
-    const totalInPx = total.value + 'px';
-    return totalInPx;
-    // let inputTotal = 
-    // localStorage.setItem("total", inputTotal.value);
-}
-
-function populateStorage() {
-
-    localStorage.setItem('width', getTotal());
-    // console.log(localStorage.key)
-}
-
-function buttonHandler() {
-    populateStorage();
-
-    let sum = localStorage.getItem('width');
-    document.querySelector('.progress__bar').style.width = sum;
-    document.querySelector('.progress__bar').style.backgroundColor = '#1abc9c';
-
-}
-
-document.querySelector('.button').addEventListener('click', buttonHandler)
