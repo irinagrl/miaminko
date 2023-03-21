@@ -28,4 +28,4 @@ an app to teach kids to earn, save and spend money. child decides what they are 
 
 ### ** part 2 **
 
-## technologies used: html5, css3, js es6
+### technologies used: html5, css3, js es6
