@@ -15,19 +15,104 @@ const months = [
 
 const weekdays = ["Вск", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 
+const days = [{
+        1: 0,
+    },
+    {
+        2: 0,
+    },
+    {
+        3: 0,
+    },
+    {
+        4: 0,
+    },
+    {
+        5: 0,
+    },
+    {
+        6: 0,
+    },
+    {
+        7: 0,
+    },
+    {
+        8: 0,
+    },
+    {
+        9: 0,
+    },
+    {
+        10: 0,
+    },
+    {
+        11: 0,
+    },
+    {
+        12: 0,
+    },
+    {
+        13: 0,
+    },
+    {
+        14: 0,
+    },
+    {
+        15: 0,
+    },
+    {
+        16: 0,
+    },
+    {
+        17: 0,
+    },
+    {
+        18: 0,
+    },
+    {
+        19: 0,
+    },
+    {
+        20: 0,
+    },
+    {
+        21: 0,
+    },
+    {
+        22: 0,
+    },
+    {
+        23: 0,
+    },
+    {
+        24: 42,
+    },
+    {
+        25: 0,
+    },
+    {
+        26: 0,
+    },
+    {
+        27: 0,
+    },
+    {
+        28: 0,
+    },
+    {
+        29: 0,
+    },
+    {
+        30: 0,
+    },
+    {
+        31: 0,
+    },
+]
+
+localStorage.setItem('days', JSON.stringify(days));
+
 let date = new Date();
-
-// Função que retorna a data atual do calendário 
-// function getCurrentDate(element, asString) {
-//     if (element) {
-//         if (asString) {
-//             return element.textContent = weekdays[date.getDay()] + ', ' + date.getDate() + " de " + months[date.getMonth()] + " de " + date.getFullYear();
-//         }
-//         return element.value = date.toISOString();
-//     }
-//     return date;
-// }
-
 
 // Main function that generates the calendar
 function generateCalendar() {
@@ -41,6 +126,7 @@ function generateCalendar() {
     // Create the table that will store the dates
     const table = document.createElement("table");
     table.id = "calendar";
+    table.className = 'calendar__table';
 
     // Create headers for the days of the week
     const trHeader = document.createElement('tr');
@@ -85,9 +171,9 @@ function generateCalendar() {
         week++;
     }
 
-    // Vai percorrer do 1º até o ultimo dia do mês
+    // It will run from the 1st to the last day of the month
     for (let i = 1; i <= lastDay;) {
-        // Enquanto o dia da semana for < 7, ele vai adicionar colunas na linha da semana
+        // As long as the day of the week is < 7, it will add columns to the week row
         while (week < 7) {
             td = document.createElement('td');
             let text = document.createTextNode(i);
@@ -102,7 +188,7 @@ function generateCalendar() {
             });
             week++;
 
-            // Controle para ele parar exatamente no ultimo dia
+            // Control for it to stop exactly on the last day
             if (i <= lastDay) {
                 i++;
                 btn.appendChild(text);
@@ -116,26 +202,21 @@ function generateCalendar() {
             }
             tr.appendChild(td);
         }
-        // Adiciona a linha na tabela
+        // Add row to table
         table.appendChild(tr);
 
-        // Cria uma nova linha para ser usada
+        // Creates a new line to be used
         tr = document.createElement("tr");
 
-        // Reseta o contador de dias da semana
+        // Reset the weekday counter
         week = 0;
     }
-    // Adiciona a tabela a div que ela deve pertencer
+    // Adds the table to the div it should belong to
     const content = document.getElementById('table');
     content.appendChild(table);
     changeActive();
     changeHeader(date);
-    setEarnedPoints()
-
-    document.getElementById('date').textContent = date;
-
-    getCurrentDate(document.getElementById("currentDate"), true);
-    getCurrentDate(document.getElementById("date"), false);
+    setEarnedPoints();
 }
 
 // Change the date through the form
@@ -158,7 +239,7 @@ function changeHeader(dateHeader) {
     month.appendChild(headerMonth);
 }
 
-// Função para mudar a cor do botão do dia que está ativo
+// Function to change the color of the button of the day that is active
 function changeActive() {
     let btnList = document.querySelectorAll('button.active');
     btnList.forEach(btn => {
@@ -173,20 +254,20 @@ function changeActive() {
     }
 }
 
-// Função que pega a data atual
+// Function that gets the current date
 function resetDate() {
     date = new Date();
     generateCalendar();
 }
 
-// Muda a data pelo numero do botão clicado
+// Changes the date by the number of the button clicked
 function changeDate(button) {
     let newDay = parseInt(button.textContent);
     date = new Date(date.getFullYear(), date.getMonth(), newDay);
     generateCalendar();
 }
 
-// Funções de avançar e retroceder mês e dia
+// Month and day forward and backward functions
 function nextMonth() {
     date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
     generateCalendar(date);
@@ -197,24 +278,15 @@ function prevMonth() {
     generateCalendar(date);
 }
 
-
-// function prevDay() {
-//     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
-//     generateCalendar();
-// }
-
-// function nextDay() {
-//     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-//     generateCalendar();
-// }
-
+// Set earned points to the correct day 
 function setEarnedPoints() {
-    let items = document.querySelectorAll('.earned')
-    // console.log(arr)
-    for (const item of items) {
-        item.textContent = '42';
+    const days = document.querySelectorAll('.btn-day');
+    const pointsEarned = document.querySelectorAll('.earned');
+    const points = JSON.parse(localStorage.getItem('days'));
+
+    for (let i = 0; i < pointsEarned.length; i++) {
+        pointsEarned[i].textContent = Object.values(points[i]).toString();
     }
-    // 
 }
 
 document.onload = generateCalendar(date);
