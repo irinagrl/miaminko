@@ -1,4 +1,4 @@
-// //To Do list
+// To Do list
 const todoItems = [{
         name: "Зубы (утро) 5",
         value: 5,
@@ -87,6 +87,23 @@ setLocalStorage();
 
 //change bar width
 function updateLocalStorage() {
+    const points = JSON.parse(localStorage.getItem('days'));
+    const pointsEarned = document.querySelectorAll('.earned');
+    const days = document.querySelectorAll('.btn-day');
+
+    // console.log(days)
+    for (let i = 0; i < pointsEarned.length; i++) {
+        if (days[i].classList.contains('active')) {
+            console.log(pointsEarned[i].textContent)
+            // console.log(Object.values(points[1]))
+
+        }
+    }
+    // for (let i = 0; i < pointsEarned.length; i++) {
+    //     pointsEarned[i].textContent = Object.values(points[i]).toString();
+    //     console.log(pointsEarned[i].textContent);
+
+    // }
     let width = Number(window.localStorage.getItem('width'));
     width = width + getPoints();
     window.localStorage.setItem('width', width);
@@ -98,6 +115,8 @@ function buttonHandler() {
     setBarStyle();
     const list = document.querySelector('.todo__list');
     const items = list.querySelectorAll('.todo__list_item');
+    const days = document.querySelectorAll('.btn-day');
+
     for (const item of items) {
         if (item.classList.contains('checked')) {
             item.classList.remove('checked');
