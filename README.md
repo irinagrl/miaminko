@@ -13,8 +13,8 @@
 * localStorage to store amount saved
 
 ** part 2 **
-* add calendar to the app
-* amount earned to be recorded to the appropriate date
+~~* add calendar to the app~~
+~~* amount earned to be recorded to the appropriate date~~
 * edit progress bar logic
 
 ** part 3 **
