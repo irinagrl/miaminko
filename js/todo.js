@@ -63,59 +63,45 @@ function selectItemHandler(evt) {
     selectedCard.classList.toggle('checked');
 }
 
-document.querySelector('.todo__list').addEventListener('click', selectItemHandler);
+// //record Points To LocalStorage
+// function setPoints() {
+//     if (localStorage.clickcount) {
+//         localStorage.clickcount = Number(localStorage.clickcount) + 1;
+//     } else {
+//         localStorage.clickcount = 1;
+//     }
+//     document.getElementById("demo").innerHTML = localStorage.clickcount;
 
-//progress bar style
-function setBarStyle() {
-    let width = Number(window.localStorage.getItem('width'));
-    if (width > 1) {
-        document.querySelector('.progress__bar').style.width = width + 'px';
-        document.querySelector('.progress__bar').style.backgroundColor = '#1abc9c';
-    }
-}
+// }
 
-//set localStorage
-function setLocalStorage() {
-    if (localStorage.getItem('width') === null) {
-        window.localStorage.setItem('width', JSON.stringify(0));
-    } {
-        window.localStorage.getItem('width');
-    }
-    setBarStyle();
-}
-setLocalStorage();
-
-//change bar width
-function updateLocalStorage() {
-    const points = JSON.parse(localStorage.getItem('days'));
-    const pointsEarned = document.querySelectorAll('.earned');
-    const days = document.querySelectorAll('.btn-day');
-
-    // console.log(days)
-    for (let i = 0; i < pointsEarned.length; i++) {
-        if (days[i].classList.contains('active')) {
-            console.log(pointsEarned[i].textContent)
-            // console.log(Object.values(points[1]))
+function updatePoints() {
+    const cards = document.querySelectorAll('.day');
+    calendar = JSON.parse(localStorage.getItem('pointsPerDay'));
+    // console.log(calendar)
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].classList.contains('active')) {
+            const points = cards[i].querySelector('.day__points');
+            points.textContent = getPoints();
+            calendar[i].points = getPoints();
+            // updateLocalStorage();
+            // calendar.push({
+            //     points: getPoints(),
+            // });
+            localStorage.setItem('pointsPerDay', JSON.stringify(calendar));
+            // letlocalStorage.setItem(pointsPerDay[i], JSON.stringify(pointsPerDay));
+            // console.log(calendar[i])
+            // console.log(calendar)
 
         }
     }
-    // for (let i = 0; i < pointsEarned.length; i++) {
-    //     pointsEarned[i].textContent = Object.values(points[i]).toString();
-    //     console.log(pointsEarned[i].textContent);
-
-    // }
-    let width = Number(window.localStorage.getItem('width'));
-    width = width + getPoints();
-    window.localStorage.setItem('width', width);
 }
 
 //Button actions
 function buttonHandler() {
-    updateLocalStorage();
+    updatePoints();
     setBarStyle();
     const list = document.querySelector('.todo__list');
     const items = list.querySelectorAll('.todo__list_item');
-    const days = document.querySelectorAll('.btn-day');
 
     for (const item of items) {
         if (item.classList.contains('checked')) {
@@ -124,4 +110,5 @@ function buttonHandler() {
     }
 }
 
+document.querySelector('.todo__list').addEventListener('click', selectItemHandler);
 document.querySelector('.button').addEventListener('click', buttonHandler);

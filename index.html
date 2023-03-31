@@ -15,17 +15,29 @@
     </header>
 
     <main class="main">
-
-        <section class="calendar" id="table">
+        <section class="calendar">
             <div class="calendar__header">
-                <div class="month" id="month-header"> </div>
-                <div class="buttons">
-                    <button class="icon" onclick="prevMonth()"> &#8678; </button>
-                    <button class="icon" onclick="nextMonth()">&#8680;</button>
+                <p class="current-date"></p>
+                <div class="icons">
+                    <span class="icon" id="prev"> ⇦ </span>
+                    <span class="icon" id="next">⇨</span>
                 </div>
             </div>
+
+            <div class="calendar__grid">
+                <ul class="weekdays">
+                    <li class="weekday">Вск</li>
+                    <li class="weekday">Пн</li>
+                    <li class="weekday">Вт</li>
+                    <li class="weekday">Ср</li>
+                    <li class="weekday">Чт</li>
+                    <li class="weekday">Пт</li>
+                    <li class="weekday">Сб</li>
+                </ul>
+                <ul class="days"></ul>
             </div>
         </section>
+
 
         <section class="todo">
             <ul class="todo__list">
@@ -35,6 +47,13 @@
             </div>
         </section>
 
+        <template id="calendar__template">
+            <li class="day">
+                <p class="day__date">${calendar.date}</p>
+                <p class="day__points">${calendar.points}</p>
+            </li>
+        </template>
+
         <template id="todo__template">
             <li class="todo__list_item">${todoItems.name}</li>
         </template>
@@ -43,8 +62,12 @@
 
     <footer class="footer"></footer>
 
-    <script src="./js/calendar.js"></script>
+
     <script src="./js/todo.js"></script>
+    <script src="./js/calendar.js"></script>
+    <!-- <script src="./js/localStorage.js"></script> -->
+
+    <script src="./js/bar.js"></script>
     <script src="./js/script.js"></script>
 
 </body>
