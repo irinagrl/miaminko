@@ -12,7 +12,7 @@
 * create progress bar where saved and to be saved amounts are shown
 * localStorage to store amount saved
 
-### ~~part 2 ~~
+### ~~part 2~~
 * add calendar to the app
 * amount earned to be recorded
 * edit progress bar logic
