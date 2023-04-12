@@ -1,220 +1,65 @@
-const months = [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь"
-];
+//create calendar
+render(calendarData);
 
-const weekdays = ["Вск", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+function setCalendar() {
+    let day = 0;
+    currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(); // getting first day of month
+    let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
+    let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(); // getting last day of month
+    let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
 
-let date = new Date();
-
-// Função que retorna a data atual do calendário 
-// function getCurrentDate(element, asString) {
-//     if (element) {
-//         if (asString) {
-//             return element.textContent = weekdays[date.getDay()] + ', ' + date.getDate() + " de " + months[date.getMonth()] + " de " + date.getFullYear();
-//         }
-//         return element.value = date.toISOString();
-//     }
-//     return date;
-// }
-
-
-// Main function that generates the calendar
-function generateCalendar() {
-
-    // Take a calendar and if it already exists remove it
-    const calendar = document.getElementById('calendar');
-    if (calendar) {
-        calendar.remove();
+    // days of previous mnth
+    for (let i = firstDayofMonth; i > 1; i--) {
+        day = lastDateofLastMonth - i + 2;
+        calendarData.push(day);
     }
 
-    // Create the table that will store the dates
-    const table = document.createElement("table");
-    table.id = "calendar";
-
-    // Create headers for the days of the week
-    const trHeader = document.createElement('tr');
-    trHeader.className = 'weekends';
-    weekdays.map(week => {
-        const th = document.createElement('th');
-        const w = document.createTextNode(week.substring());
-        th.appendChild(w);
-        trHeader.appendChild(th);
-    });
-
-    // Add headers to the table
-    table.appendChild(trHeader);
-
-    //Get the day of the week from the first day of the month
-    const weekDay = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        1
-    ).getDay();
-
-    //Get the last day of the month
-    const lastDay = new Date(
-        date.getFullYear(),
-        date.getMonth() + 1,
-        0
-    ).getDate();
-
-    let tr = document.createElement("tr");
-    let td = '';
-    let empty = '';
-    let earned = '42';
-    let btn = document.createElement('button');
-    let week = 0;
-
-    // If the day of the week of the first day of the month is greater than 0(first day of the week);
-    while (week < weekDay) {
-        td = document.createElement("td");
-        empty = document.createTextNode(' ');
-        td.appendChild(empty);
-        tr.appendChild(td);
-        week++;
+    // days of curr mnth
+    for (let i = 0; i < lastDateofMonth; i++) {
+        day = i + 1;
+        calendarData.push(day);
     }
 
-    // Vai percorrer do 1º até o ultimo dia do mês
-    for (let i = 1; i <= lastDay;) {
-        // Enquanto o dia da semana for < 7, ele vai adicionar colunas na linha da semana
-        while (week < 7) {
-            td = document.createElement('td');
-            let text = document.createTextNode(i);
-            btn = document.createElement('button');
-            div = document.createElement('div');
-
-            btn.className = "btn-day";
-            div.className = "earned";
-
-            btn.addEventListener('click', function () {
-                changeDate(this)
-            });
-            week++;
-
-            // Controle para ele parar exatamente no ultimo dia
-            if (i <= lastDay) {
-                i++;
-                btn.appendChild(text);
-                td.appendChild(btn)
-                td.appendChild(div)
-
-
-            } else {
-                text = document.createTextNode(' ');
-                td.appendChild(text);
-            }
-            tr.appendChild(td);
-        }
-        // Adiciona a linha na tabela
-        table.appendChild(tr);
-
-        // Cria uma nova linha para ser usada
-        tr = document.createElement("tr");
-
-        // Reseta o contador de dias da semana
-        week = 0;
+    // days of next mnth
+    for (let i = lastDayofMonth; i < 7; i++) {
+        day = i - lastDayofMonth + 1;
+        calendarData.push(day);
     }
-    // Adiciona a tabela a div que ela deve pertencer
-    const content = document.getElementById('table');
-    content.appendChild(table);
-    changeActive();
-    changeHeader(date);
-    setEarnedPoints()
 
-    document.getElementById('date').textContent = date;
-
-    getCurrentDate(document.getElementById("currentDate"), true);
-    getCurrentDate(document.getElementById("date"), false);
+    return calendarData
 }
 
-// Change the date through the form
-function setDate(form) {
-    let newDate = new Date(form.date.value);
-    date = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate() + 1);
-    generateCalendar();
-    return false;
-}
-
-// Method Change the month and year at the top of the calendar
-function changeHeader(dateHeader) {
-    const month = document.getElementById("month-header");
-    if (month.childNodes[0]) {
-        month.removeChild(month.childNodes[0]);
-    }
-    const headerMonth = document.createElement("h1");
-    const textMonth = document.createTextNode(months[dateHeader.getMonth()] + " " + dateHeader.getFullYear());
-    headerMonth.appendChild(textMonth);
-    month.appendChild(headerMonth);
-}
-
-// Função para mudar a cor do botão do dia que está ativo
-function changeActive() {
-    let btnList = document.querySelectorAll('button.active');
-    btnList.forEach(btn => {
-        btn.classList.remove('active');
-    });
-    btnList = document.getElementsByClassName('btn-day');
-    for (let i = 0; i < btnList.length; i++) {
-        const btn = btnList[i];
-        if (btn.textContent === (date.getDate()).toString()) {
-            btn.classList.add('active');
-        }
+function render(items) {
+    setCalendar();
+    for (let i = 0; i < items.length; i++) {
+        createCard(items[i]);
     }
 }
 
-// Função que pega a data atual
-function resetDate() {
-    date = new Date();
-    generateCalendar();
+function getItemElement(item) {
+    const itemTemplate = document.querySelector('#calendar__template').content;
+    const itemElement = itemTemplate.cloneNode(true);
+    itemElement.querySelector('.day').innerText = item;
+    return itemElement;
 }
 
-// Muda a data pelo numero do botão clicado
-function changeDate(button) {
-    let newDay = parseInt(button.textContent);
-    date = new Date(date.getFullYear(), date.getMonth(), newDay);
-    generateCalendar();
+function createCard(item) {
+    const list = document.querySelector('.days');
+    const itemElement = getItemElement(item);
+    list.appendChild(itemElement);
 }
 
-// Funções de avançar e retroceder mês e dia
-function nextMonth() {
-    date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-    generateCalendar(date);
-}
+//select a card with a click
+function selectedDayHandler(evt) {
+    const cards = document.querySelectorAll('.day');
+    const selectedCard = evt.target.closest('.day');
 
-function prevMonth() {
-    date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-    generateCalendar(date);
-}
-
-
-// function prevDay() {
-//     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
-//     generateCalendar();
-// }
-
-// function nextDay() {
-//     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-//     generateCalendar();
-// }
-
-function setEarnedPoints() {
-    let items = document.querySelectorAll('.earned')
-    // console.log(arr)
-    for (const item of items) {
-        item.textContent = '42';
+    for (const card of cards) {
+        card.classList.remove('checked');
     }
-    // 
+
+    selectedCard.classList.add('checked');
 }
 
-document.onload = generateCalendar(date);
+document.querySelector('.days').addEventListener('click', selectedDayHandler);

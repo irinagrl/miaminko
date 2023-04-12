@@ -12,20 +12,17 @@
 * create progress bar where saved and to be saved amounts are shown
 * localStorage to store amount saved
 
-### ** part 2 **
+### ~~part 2 ~~
 * add calendar to the app
-* amount earned to be recorded to the appropriate date
+* amount earned to be recorded
 * edit progress bar logic
 
 ### ** part 3 **
 * rewrite app using vue.js
 
 ### ** part 4 **
-* beautify the app
-
-### ** part 5 **
 * add admin mode to be able update task list/ amount the child wants to save
-
-### ** part 2 **
+* add points to appropriate date
+* add inactive class to date that was edited
 
 ## technologies used: html5, css3, js es6
