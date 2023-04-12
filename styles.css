@@ -5,23 +5,41 @@
 
 body {
     font-family: "Garamond", Garamond, serif;
-    max-width: 900px;
+    max-width: 768px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .header {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border: 1px solid #1abc9c;
-    width: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
+    width: 95%;
+    border: 1px solid #1abc9c;
+    height: 50px;
+    position: relative;
+}
+
+.header__title_toSave {
+    position: absolute;
+    top: calc(50px / 4);
+    right: 10px;
+}
+
+.header__title_saved {
+    position: absolute;
+    top: calc(50px / 4);
+    left: 10px;
 }
 
 .progress__bar {
-    height: 50px;
+    height: 100%;
 }
+
+/* .class__test {
+    color: #000;
+} */
 
 .main {
     display: flex;
@@ -31,7 +49,7 @@ body {
 }
 
 .todo {
-    width: 280px;
+    width: 200px;
 }
 
 .todo__btn {
@@ -49,113 +67,23 @@ ul {
     list-style-type: none;
 }
 
-/* ToDo list */
 
 .todo__list_item {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 40px;
+    padding-bottom: 20px;
+    padding-left: 30px;
     font-size: 18px;
     transition: 0.2s;
-
-    /* make the list items unselectable */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
-/* Darker background-color on hover */
-.todo__list_item:hover {
-    background: #ddd;
-}
-
-/* Add a "checked" mark when clicked on */
-.todo__list_item.checked::before {
-    content: '';
-    position: absolute;
-    border-color: #000;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-}
-
-/* Calendar */
-
-.calendar__grid {
-    width: 98%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.day {
-    width: 14%
-}
-
-.btn {
-    font-size: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    color: #262626;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.2s ease;
-    cursor: pointer;
-    outline: 0;
-}
-
-.btn:hover {
-    color: #FFF;
-}
-
-.btn-small {
-    min-width: 50px;
-}
-
-.earned {
-    width: 50%;
-    height: 50px;
-    padding-top: 25px;
-    color: #1abc9c;
-}
-
-.btn-day {
-    font-size: 1em;
-    display: flex;
-    border: none;
-    background: #fff;
-    width: 50%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 99;
-    outline: 0;
-    transition: 0.4s all;
-}
-
-.btn-day.active {
-    color: #455AF7;
-    font-weight: 600;
-    z-index: 99;
-}
-
-.btn-day.active::before {
-    position: absolute;
-    content: '';
-    border-radius: 10px;
-    z-index: -1;
+.checked {
+    background: #81bcb1;
 }
 
 .calendar {
-    /* height: 740px; */
-    width: 470px;
-    background: #ffffff;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .calendar__header {
@@ -164,45 +92,33 @@ ul {
     align-items: center;
     padding: 15px;
     height: 50px;
-    width: 100%;
     color: #262626;
 }
 
-.icon {
-    padding: 10px;
-    margin: 0 0 0 5px;
-    background: #ffffff;
-    color: #455af7;
-    border: none;
-    cursor: pointer;
+.days {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 5px;
 }
 
-.weekends th {
-    color: gray;
-    font-weight: 400;
-    width: 50px;
-    margin: 10px 0;
-}
-
-#calendar tr {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-#calendar td {
-    display: flex;
+.day {
+    border: solid 1px #1abc9c;
     height: 50px;
     width: 50px;
-    z-index: 99;
-    border: 1px solid grey;
     border-radius: 10px;
     padding: 5px;
+    position: relative;
 }
 
-.calendar__table {
-    width: 530px;
+.day {
+    font-weight: 700;
+    color: #455af7;
+}
+
+.weekdays {
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    text-align: center;
+    margin-bottom: 15px;
 }
