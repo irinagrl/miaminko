@@ -1,41 +1,22 @@
+setBarStyle();
+
 //progress bar style
 function setBarStyle() {
-    let width = getTotalPoints();
+    let width = JSON.parse(localStorage.getItem('width'));
+
     if (width > 1) {
         document.querySelector('.progress__bar').style.width = width + 'px';
         document.querySelector('.progress__bar').style.backgroundColor = '#1abc9c';
+        updateHeaderTitle();
     }
 }
 
-setBarStyle();
+function updateHeaderTitle() { //header title = amount to save - amount saved 
+    let width = JSON.parse(localStorage.getItem('width'));
+    const headerTitleToSave = document.querySelector('.header__title_toSave');
+    const headerTitleSaved = document.querySelector('.header__title_saved');
 
-//set localStorage
-// function setLocalStorage() {
-//     if (localStorage.getItem('width') === null) {
-//         window.localStorage.setItem('width', JSON.stringify(0));
-//     } {
-//         window.localStorage.getItem('width');
-//     }
-//     setBarStyle();
-// }
-// setLocalStorage();
-
-//change bar width
-// function updateLocalStorage() {
-//     let width = Number(window.localStorage.getItem('width'));
-//     width = width + getPoints();
-//     window.localStorage.setItem('width', width);
-// }
-
-function getTotalPoints() {
-    const calArr = JSON.parse(localStorage.getItem('pointsPerDay'));
-    let total = 20;
-    // console.log()
-
-    for (let i = 0; i < calArr.length; i++) {
-        total += calArr[0].points;
-    }
-    return total;
+    headerTitleToSave.textContent = amountToSave - width;
+    headerTitleSaved.textContent = 0 + width;
+    return;
 }
-
-console.log(getTotalPoints())

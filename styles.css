@@ -5,22 +5,36 @@
 
 body {
     font-family: "Garamond", Garamond, serif;
-    max-width: 900px;
+    max-width: 768px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .header {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border: 1px solid #1abc9c;
-    width: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
+    width: 95%;
+    border: 1px solid #1abc9c;
+    height: 50px;
+    position: relative;
+}
+
+.header__title_toSave {
+    position: absolute;
+    top: calc(50px / 4);
+    right: 10px;
+}
+
+.header__title_saved {
+    position: absolute;
+    top: calc(50px / 4);
+    left: 10px;
 }
 
 .progress__bar {
-    height: 50px;
+    height: 100%;
 }
 
 /* .class__test {
@@ -35,7 +49,7 @@ body {
 }
 
 .todo {
-    width: 280px;
+    width: 200px;
 }
 
 .todo__btn {
@@ -53,113 +67,23 @@ ul {
     list-style-type: none;
 }
 
-/* ToDo list */
 
 .todo__list_item {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 40px;
+    padding-bottom: 20px;
+    padding-left: 30px;
     font-size: 18px;
     transition: 0.2s;
-
-    /* make the list items unselectable */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
-/* Darker background-color on hover */
-.todo__list_item:hover {
-    background: #ddd;
+.checked {
+    background: #81bcb1;
 }
 
-/* Add a "checked" mark when clicked on */
-.todo__list_item.checked::before {
-    content: '';
-    position: absolute;
-    border-color: #000;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-}
-
-/* Calendar */
-
-/* .calendar__grid {
-    width: 98%;
+.calendar {
     display: flex;
-    justify-content: space-between;
-} */
-
-/* .day {
-    width: 14%
-}
-
-.btn {
-    font-size: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    color: #262626;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.2s ease;
-    cursor: pointer;
-    outline: 0;
-}
-
-.btn:hover {
-    color: #FFF;
-}
-
-.btn-small {
-    min-width: 50px;
-}
-
-.earned {
-    width: 50%;
-    height: 50px;
-    padding-top: 25px;
-    color: #1abc9c;
-}
-
-.btn-day {
-    font-size: 1em;
-    display: flex;
-    border: none;
-    background: #fff;
-    width: 50%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 99;
-    outline: 0;
-    transition: 0.4s all;
-}
-
-.btn-day.active {
-    color: #455AF7;
-    font-weight: 600;
-    z-index: 99;
-}
-
-.btn-day.active::before {
-    position: absolute;
-    content: '';
-    border-radius: 10px;
-    z-index: -1;
-}*/
-
-.calendar__grid {
-    height: 100%;
-    width: 100%;
-    background: #fff;
-    padding: 10px;
+    flex-direction: column;
 }
 
 .calendar__header {
@@ -168,183 +92,33 @@ ul {
     align-items: center;
     padding: 15px;
     height: 50px;
-    width: 100%;
     color: #262626;
 }
 
-.icon {
-    padding: 10px;
-    margin-right: 10px;
-    /* background: #ffffff; */
-    color: #1abc9c;
-    border: none;
-    cursor: pointer;
+.days {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 5px;
 }
 
-/* .weekends th {
-    color: gray;
-    font-weight: 400;
-    width: 50px;
-    margin: 10px 0;
-} */
-
-
-/* #calendar tr {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-#calendar td {
-    display: flex;
+.day {
+    border: solid 1px #1abc9c;
     height: 50px;
     width: 50px;
-    z-index: 99;
-    border: 1px solid grey;
     border-radius: 10px;
     padding: 5px;
-} */
-
-/* 
-.calendar__table {
-    width: 530px;
-} */
-
-/* Import Google font - Poppins @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap'); */
-
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-} */
-
-.wrapper header {
-    display: flex;
-    align-items: center;
-    padding: 25px 30px 10px;
-    justify-content: space-between;
-}
-
-header .icons {
-    display: flex;
-
-}
-
-header .icons span {
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
-    cursor: pointer;
-    color: #878787;
-    text-align: center;
-    line-height: 38px;
-    font-size: 1.9rem;
-    user-select: none;
-    border-radius: 50%;
-}
-
-.icons {
-    margin-right: 50px;
-
-}
-
-.icons span:last-child {
-    margin-right: -10px;
-}
-
-header .icons span:hover {
-    background: #f2f2f2;
-}
-
-header .current-date {
-    font-size: 1.45rem;
-    font-weight: 500;
-}
-
-.calendar {
-    /* padding: 20px; */
-    width: 700px;
-}
-
-.day__points {
-    text-align: right;
-}
-
-.calendar ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    /* text-align: center; */
-}
-
-.calendar .days {
-    /* margin-bottom: 20px; */
-}
-
-/* .day {
-    border: 1px solid black;
-    width: 20px;
-    height: 20px;
-
-} */
-
-.calendar li {
-    /* color: #333; */
-
-    /* font-size: 1.07rem; */
-    padding: 5px;
-    margin: 10px;
-    border-radius: 20%;
-}
-
-.weekday {
-    /* font-weight: 500;
-    cursor: default; */
-    border: 0px;
-    color: #1abc9c;
-    text-align: center;
-    width: 60px;
-    font-weight: 800;
-}
-
-.calendar .days li {
-    z-index: 1;
-    cursor: pointer;
     position: relative;
-    /* margin-top: 30px; */
-    border: 1px solid black;
-    width: 60px;
-    height: 60px;
 }
 
-.days li.inactive {
-    color: #aaa;
+.day {
+    font-weight: 700;
+    color: #455af7;
 }
 
-.active {
-    background: #1abc9c;
-}
-
-.days li::before {
-    position: absolute;
-    content: "";
-    left: 50%;
-    top: 50%;
-    /* height: 40px;
-    width: 40px; */
-    z-index: -1;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.days li.active::before {
-    background: #1abc9c;
-}
-
-.days li:not(.active):hover::before {
-    background: #f2f2f2;
+.weekdays {
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    text-align: center;
+    margin-bottom: 15px;
 }

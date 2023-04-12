@@ -1,34 +1,12 @@
-// To Do list
-const todoItems = [{
-        name: "Зубы (утро) 5",
-        value: 5,
-    },
-    {
-        name: "Зубы (вечер) 5",
-        value: 5,
-    },
-    {
-        name: "Заправить постель 5",
-        value: 5,
-    },
-    {
-        name: "Овощь, фрукт, новое 10",
-        value: 10,
-    },
-    {
-        name: "Логопед 10",
-        value: 10,
-    },
-]
-
 //create todo list
-function render() {
-    for (let i = 0; i < todoItems.length; i++) {
-        createCard(todoItems[i]);
-    }
-}
 
 render(todoItems);
+
+function render() {
+    for (let i = 0; i < todoItems.length; i++) {
+        createTodoCard(todoItems[i]);
+    }
+}
 
 function getItemElement(item) {
     const itemTemplate = document.querySelector('#todo__template').content;
@@ -37,13 +15,15 @@ function getItemElement(item) {
     return itemElement;
 }
 
-function createCard(item) {
+function createTodoCard(item) {
     const list = document.querySelector('.todo__list');
     const itemElement = getItemElement(item);
     list.appendChild(itemElement);
 }
 
-function getPoints() {
+//work with todo list
+//calc total of selected todo items
+function getSelectedPoints() {
     const list = document.querySelector('.todo__list');
     const items = list.querySelectorAll('.todo__list_item');
     let total = 0;
@@ -63,45 +43,20 @@ function selectItemHandler(evt) {
     selectedCard.classList.toggle('checked');
 }
 
-// //record Points To LocalStorage
-// function setPoints() {
-//     if (localStorage.clickcount) {
-//         localStorage.clickcount = Number(localStorage.clickcount) + 1;
-//     } else {
-//         localStorage.clickcount = 1;
-//     }
-//     document.getElementById("demo").innerHTML = localStorage.clickcount;
-
-// }
-
-function updatePoints() {
-    const cards = document.querySelectorAll('.day');
-    calendar = JSON.parse(localStorage.getItem('pointsPerDay'));
-    // console.log(calendar)
-    for (let i = 0; i < cards.length; i++) {
-        if (cards[i].classList.contains('active')) {
-            const points = cards[i].querySelector('.day__points');
-            points.textContent = getPoints();
-            calendar[i].points = getPoints();
-            // updateLocalStorage();
-            // calendar.push({
-            //     points: getPoints(),
-            // });
-            localStorage.setItem('pointsPerDay', JSON.stringify(calendar));
-            // letlocalStorage.setItem(pointsPerDay[i], JSON.stringify(pointsPerDay));
-            // console.log(calendar[i])
-            // console.log(calendar)
-
-        }
-    }
-}
 
 //Button actions
 function buttonHandler() {
-    updatePoints();
+    const items = document.querySelectorAll('.todo__list_item');
+    const cards = document.querySelectorAll('.day');
+
+    updateLocalStorage();
     setBarStyle();
-    const list = document.querySelector('.todo__list');
-    const items = list.querySelectorAll('.todo__list_item');
+
+    for (const card of cards) {
+        if (card.classList.contains('checked')) {
+            card.classList.remove('checked');
+        }
+    }
 
     for (const item of items) {
         if (item.classList.contains('checked')) {
