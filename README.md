@@ -5,7 +5,7 @@
 
 ## https://irinagrl.github.io/miaminko/
 
-~~part 1~~
+### ~~part 1~~
 * template for task list 
 * checked task items
 * button ok that updates progress bar and refreshes task list
@@ -17,7 +17,7 @@
 * amount earned to be recorded
 * edit progress bar logic
 
-** part 3 **
+### ** part 3 **
 * rewrite app using vue.js
 
 ### ** part 4 **
