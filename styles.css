@@ -15,9 +15,22 @@ body {
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    width: 95%;
+}
+
+.btn__reset {
+    background-color: #1abc9c;
+    width: 100px;
+    height: 50px;
+    margin-top: 25px;
+    font-family: "Garamond", Garamond, serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.bar {
     border: 1px solid #1abc9c;
     height: 50px;
+    width: 95%;
     position: relative;
 }
 
@@ -36,10 +49,6 @@ body {
 .progress__bar {
     height: 100%;
 }
-
-/* .class__test {
-    color: #000;
-} */
 
 .main {
     display: flex;

@@ -20,3 +20,16 @@ function updateHeaderTitle() { //header title = amount to save - amount saved
     headerTitleSaved.textContent = 0 + width;
     return;
 }
+
+function resetBarData() {
+    let barData = JSON.parse(localStorage.getItem('width'));
+
+    if (barData !== 0) {
+        localStorage.clear();
+        updateHeaderTitle();
+        document.querySelector('.progress__bar').style.backgroundColor = '#fff';
+
+    }
+}
+
+document.querySelector('.btn__reset').addEventListener('click', resetBarData);
