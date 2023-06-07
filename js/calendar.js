@@ -56,10 +56,14 @@ function selectedDayHandler(evt) {
     const selectedCard = evt.target.closest('.day');
 
     for (const card of cards) {
-        card.classList.remove('checked');
+        if (card === selectedCard) {
+            card.classList.toggle('checked');
+        } else {
+            if (card.classList.contains('checked')) {
+                card.classList.remove('checked');
+            }
+        }
     }
-
-    selectedCard.classList.add('checked');
 }
 
 document.querySelector('.days').addEventListener('click', selectedDayHandler);

@@ -43,27 +43,54 @@ function selectItemHandler(evt) {
     selectedCard.classList.toggle('checked');
 }
 
+function validate() {
+    let validation = false;
+    const items = document.querySelectorAll('.todo__list_item');
+    const cards = document.querySelectorAll('.day');
+
+    for (const card of cards) {
+        if (card.classList.contains('checked')) {
+            validation += true;
+            break;
+        }
+    }
+
+    for (const item of items) {
+        if (item.classList.contains('checked')) {
+            validation += true;
+            break;
+        }
+    }
+
+    return validation;
+
+}
 
 //Button actions
 function buttonHandler() {
     const items = document.querySelectorAll('.todo__list_item');
     const cards = document.querySelectorAll('.day');
 
-    updateLocalStorage();
-    setBarStyle();
+    if (validate() === 2) {
+        document.querySelector('.todo__error').style.display = 'none';
+        updateLocalStorage();
+        setBarStyle();
 
-    for (const card of cards) {
-        if (card.classList.contains('checked')) {
-            card.classList.remove('checked');
+        for (const card of cards) {
+            if (card.classList.contains('checked')) {
+                card.classList.remove('checked');
+            }
         }
-    }
 
-    for (const item of items) {
-        if (item.classList.contains('checked')) {
-            item.classList.remove('checked');
+        for (const item of items) {
+            if (item.classList.contains('checked')) {
+                item.classList.remove('checked');
+            }
         }
+    } else {
+        document.querySelector('.todo__error').style.display = 'inline';
     }
 }
 
 document.querySelector('.todo__list').addEventListener('click', selectItemHandler);
-document.querySelector('.button').addEventListener('click', buttonHandler);
+document.querySelector('.todo__btn').addEventListener('click', buttonHandler);

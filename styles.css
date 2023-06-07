@@ -12,7 +12,6 @@ body {
 
 .header {
     margin-top: 50px;
-    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -55,17 +54,25 @@ body {
     justify-content: space-around;
     align-content: space-around;
     align-items: center;
+    align-content: flex-start;
 }
 
 .todo {
-    width: 200px;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #b7f9ec;
+    border-radius: 10px;
+    padding: 20px;
 }
+
+
 
 .todo__btn {
     width: 100px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
 }
 
 .button {
@@ -81,13 +88,21 @@ ul {
     cursor: pointer;
     position: relative;
     padding-bottom: 20px;
-    padding-left: 30px;
     font-size: 18px;
     transition: 0.2s;
 }
 
+/*in js file*/
 .checked {
     background: #81bcb1;
+}
+
+.todo__error {
+    padding: 10px;
+    width: 100%;
+    font-weight: 700;
+    display: none;
+    color: red;
 }
 
 .calendar {
